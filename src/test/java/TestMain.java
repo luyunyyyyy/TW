@@ -100,6 +100,5 @@ public class TestMain {
         Context context = new Context();
         assertEquals(Strs.NORMAL, Main.addBooking("U001 2017-01-01 20:00~22:00 A", context));
         assertEquals(Strs.CONFLICTS, Main.addBooking("U001 2017-01-01 20:00~21:00 A", context));
-
     }
 }

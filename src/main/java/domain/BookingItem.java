@@ -1,11 +1,23 @@
 package domain;
 
+import java.util.Objects;
+
 public class BookingItem {
     private String userId;
     private String bookingDate;
     private int beginHour;
     private int endHour;
     private String siteId;
+
+    private boolean breakBooking;
+
+    public boolean isBreakBooking() {
+        return breakBooking;
+    }
+
+    public void setBreakBooking(boolean breakBooking) {
+        this.breakBooking = breakBooking;
+    }
 
     public BookingItem(String userId, String bookingDate, int beginHour, int endHour, String siteId) {
         this.userId = userId;
@@ -53,6 +65,24 @@ public class BookingItem {
 
     public void setSiteId(String siteId) {
         this.siteId = siteId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookingItem that = (BookingItem) o;
+        return beginHour == that.beginHour &&
+                endHour == that.endHour &&
+                Objects.equals(userId, that.userId) &&
+                Objects.equals(bookingDate, that.bookingDate) &&
+                Objects.equals(siteId, that.siteId);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(userId, bookingDate, beginHour, endHour, siteId);
     }
     //private
 }
