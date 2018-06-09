@@ -2,7 +2,9 @@ package domain;
 
 import java.util.Objects;
 
-public class BookingItem {
+import static util.Util.isWeekend;
+
+public class BookingItem implements Comparable<BookingItem> {
     private String userId;
     private String bookingDate;
     private int beginHour;
@@ -83,6 +85,71 @@ public class BookingItem {
     public int hashCode() {
 
         return Objects.hash(userId, bookingDate, beginHour, endHour, siteId);
+    }
+
+    @Override
+    public int compareTo(BookingItem o) {
+        //this.bookingDate.compareTo(o.getBookingDate());
+
+
+        return this.getBookingDate().compareTo(o.getBookingDate());
+    }
+
+    public double getMoneyOfBooking() {
+        double money = 0;
+
+        if (!isWeekend(this.getBookingDate())) {
+            for (int time = this.getBeginHour(); time < this.endHour; time++) {
+                switch (time) {
+                    case 9:
+                    case 10:
+                    case 11:
+                        money += 30;
+                        break;
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                        money += 50;
+                        break;
+                    case 18:
+                    case 19:
+                        money += 80;
+                        break;
+                    case 20:
+                    case 21:
+                        money += 60;
+                        break;
+                }
+            }
+        } else {
+            for (int time = this.getBeginHour(); time < this.endHour; time++) {
+                switch (time) {
+                    case 9:
+                    case 10:
+                    case 11:
+                        money += 40;
+                        break;
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                        money += 50;
+                        break;
+                    case 18:
+                    case 19:
+                    case 20:
+                    case 21:
+                        money += 60;
+                        break;
+                }
+            }
+        }
+        return money;
     }
     //private
 }

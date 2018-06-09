@@ -5,10 +5,11 @@ import domain.Strs;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
     }
 
     public static InputType formatCheck(String input) {
@@ -103,7 +104,9 @@ public class Main {
             if (tempBookingItem.getSiteId().equals(bookingItem.getSiteId()) &&
                     tempBookingItem.getBookingDate().equals(bookingItem.getBookingDate()) &&
                     !(bookingItem.getEndHour() <= tempBookingItem.getBeginHour()
-                            || tempBookingItem.getEndHour() <= bookingItem.getBeginHour())) {
+                            || tempBookingItem.getEndHour() <= bookingItem.getBeginHour())
+                //&&
+                    ) {
                 return true;
             }
         }

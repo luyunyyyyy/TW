@@ -8,7 +8,8 @@ public class Context {
     private int siteEndTime = 22;
     private LinkedHashSet<String> siteSet;
 
-    public ArrayList<BookingItem> bookingItems;
+    private ArrayList<BookingItem> bookingItems;
+    private ArrayList<BookingItem> breakBookingItems;
 
     public Context() {
         siteSet = new LinkedHashSet<>();
@@ -17,6 +18,7 @@ public class Context {
         siteSet.add("C");
         siteSet.add("D");
         bookingItems = new ArrayList<>();
+        breakBookingItems = new ArrayList<>();
     }
 
     public ArrayList<BookingItem> getBookingItems() {
@@ -49,5 +51,13 @@ public class Context {
 
     public void setSiteEndTime(int siteEndTime) {
         this.siteEndTime = siteEndTime;
+    }
+
+    public ArrayList<BookingItem> getBreakBookingItems() {
+        return breakBookingItems;
+    }
+
+    public void setBreakBookingItems(ArrayList<BookingItem> breakBookingItems) {
+        this.breakBookingItems = breakBookingItems;
     }
 }
