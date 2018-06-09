@@ -1,12 +1,14 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
 public class Context {
     private int siteBeginTime = 9;
     private int siteEndTime = 22;
     private LinkedHashSet<String> siteSet;
-//    public ArrayList<Item> arrayList;
+
+    public ArrayList<BookingItem> bookingItems;
 
     public Context() {
         siteSet = new LinkedHashSet<>();
@@ -14,6 +16,15 @@ public class Context {
         siteSet.add("B");
         siteSet.add("C");
         siteSet.add("D");
+        bookingItems = new ArrayList<>();
+    }
+
+    public ArrayList<BookingItem> getBookingItems() {
+        return bookingItems;
+    }
+
+    public void setBookingItems(ArrayList<BookingItem> bookingItems) {
+        this.bookingItems = bookingItems;
     }
 
     public LinkedHashSet<String> getSiteSet() {
