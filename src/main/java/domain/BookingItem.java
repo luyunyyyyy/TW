@@ -1,15 +1,13 @@
 package domain;
 
-import java.util.Date;
-
 public class BookingItem {
     private String userId;
-    private Date bookingDate;
+    private String bookingDate;
     private int beginHour;
     private int endHour;
     private String siteId;
 
-    public BookingItem(String userId, Date bookingDate, int beginHour, int endHour, String siteId) {
+    public BookingItem(String userId, String bookingDate, int beginHour, int endHour, String siteId) {
         this.userId = userId;
         this.bookingDate = bookingDate;
         this.beginHour = beginHour;
@@ -25,11 +23,11 @@ public class BookingItem {
         this.userId = userId;
     }
 
-    public Date getBookingDate() {
+    public String getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
+    public void setBookingDate(String bookingDate) {
         this.bookingDate = bookingDate;
     }
 

@@ -4,7 +4,6 @@ import domain.InputType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,7 +45,7 @@ public class Main {
         if (input.length() != 11) {
             return false;
         }
-        String[] inputSplit = input.split(":|~");
+        String[] inputSplit = input.split("[:~]");
 
         if (Integer.parseInt(inputSplit[0]) < siteBeginTime || Integer.parseInt(inputSplit[2]) > siteEndTime) {
             return false;
@@ -61,16 +60,15 @@ public class Main {
         return null;
     }
 
-    public void addBookingItem(String input, Context context) {
+    public static void addBookingItem(String input, Context context) {
         final int user = 0;
         final int date = 1;
         final int time = 2;
         final int site = 3;
         String[] splitInputStrs = input.split(" ");
-
-        String[] inputSplit = input.split(":|~");
+        String[] inputSplit = splitInputStrs[time].split(":|~");
         BookingItem bookingItem = new BookingItem(splitInputStrs[user],
-                new Date(splitInputStrs[date]),
+                (splitInputStrs[date]),
                 Integer.parseInt(inputSplit[0]),
                 Integer.parseInt(inputSplit[2]),
                 splitInputStrs[site]);

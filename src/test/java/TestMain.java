@@ -36,8 +36,6 @@ public class TestMain {
         assertEquals(INVALID, Main.formatCheck("U001 2017-01-01 10:00~10:30 A"));
         assertEquals(INVALID, Main.formatCheck("U001 2017-01-01 9:00~10:00 A"));
         assertEquals(INVALID, Main.formatCheck("U001 2017-01-01 8:00~9:00 A"));
-
-
     }
 
     @Test
@@ -46,4 +44,16 @@ public class TestMain {
         assertEquals(INVALID, Main.formatCheck("U001 2017-01-01 20:00~22:00 AC"));
         assertEquals(NORMAL, Main.formatCheck("U001 2017-01-01 20:00~22:00 A"));
     }
+
+    @Test
+    public void add_item() {
+        Context context = new Context();
+        Main.addBookingItem("U001 2017-01-01 20:00~22:00 A", context);
+        assertEquals(context.getBookingItems().get(0).getUserId(), "U001");
+        assertEquals(context.getBookingItems().get(0).getBookingDate(), "2017-01-01");
+        assertEquals(context.getBookingItems().get(0).getBeginHour(), 20);
+        assertEquals(context.getBookingItems().get(0).getEndHour(), 22);
+        assertEquals(context.getBookingItems().get(0).getSiteId(), "A");
+    }
+
 }
