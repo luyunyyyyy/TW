@@ -1,9 +1,6 @@
 import domain.Context;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static util.Util.dateToWeek;
-
 public class BalanceTest {
 
     @Test
@@ -34,7 +31,7 @@ public class BalanceTest {
 //        SimpleDateFormat dateFm = new SimpleDateFormat("EEEE");
 //        String currSun = dateFm.format(new Date("2018-06-09"));
 //        System.out.println(currSun);
-        assertEquals(dateToWeek("2017-01-01"), 7);
+        //assertEquals(dateToWeek("2017-01-01"), 7);
     }
 
 

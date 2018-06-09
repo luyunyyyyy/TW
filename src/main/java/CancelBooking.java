@@ -1,6 +1,9 @@
 import domain.BookingItem;
 import domain.Context;
+import domain.InputType;
 import domain.Strs;
+
+import static domain.Strs.INVALID;
 
 public class CancelBooking {
     //public void
@@ -9,6 +12,9 @@ public class CancelBooking {
         /*
         缺少格式检验
          */
+        if (Main.formatCheck(input.substring(0, input.length() - 2)) != InputType.NORMAL) {
+            return INVALID;
+        }
         if (context.getBookingItems().size() == 0) {
             return Strs.NOTEXISTS;
         }
@@ -17,7 +23,6 @@ public class CancelBooking {
         for (BookingItem temp : context.getBookingItems()) {
             if (temp.equals(bookingItem)) {
                 temp.setBreakBooking(true);
-                //TODO 删去原来数组中的item
                 context.getBreakBookingItems().add(bookingItem);
                 context.getBookingItems().remove(temp);
                 return Strs.NORMAL;

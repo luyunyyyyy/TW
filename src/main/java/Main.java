@@ -9,7 +9,25 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("输入");
         Scanner scanner = new Scanner(System.in);
+        String input;
+        Context context = new Context();
+        while (true) {
+            input = scanner.nextLine();
+            if (input.equals("")) {
+                System.out.println(Balance.getBalance(context));
+            } else {
+                if (input.split(" ").length == 5) {
+                    System.out.println(CancelBooking.cancelBooking(input, context));
+                } else {//U001 2017-01-01 18:00~20:00 B
+                    System.out.println(addBooking(input, context));
+                }
+            }
+            if (input.equals("q")) {
+                break;
+            }
+        }
     }
 
     public static InputType formatCheck(String input) {
@@ -52,7 +70,7 @@ public class Main {
         if (Integer.parseInt(inputSplit[0]) < siteBeginTime || Integer.parseInt(inputSplit[2]) > siteEndTime) {
             return false;
         }
-        return Integer.parseInt(inputSplit[1]) == 0 && Integer.parseInt(inputSplit[3]) == 0;
+        return !inputSplit[0].equals(inputSplit[2]) && Integer.parseInt(inputSplit[1]) == 0 && Integer.parseInt(inputSplit[3]) == 0;
     }
 
 
@@ -90,13 +108,12 @@ public class Main {
         final int time = 2;
         final int site = 3;
         String[] splitInputStrs = input.split(" ");
-        String[] inputSplit = splitInputStrs[time].split(":|~");
-        BookingItem bookingItem = new BookingItem(splitInputStrs[user],
+        String[] inputSplit = splitInputStrs[time].split("[:~]");
+        return new BookingItem(splitInputStrs[user],
                 (splitInputStrs[date]),
                 Integer.parseInt(inputSplit[0]),
                 Integer.parseInt(inputSplit[2]),
                 splitInputStrs[site]);
-        return bookingItem;
     }
 
     public static boolean isConflicts(BookingItem bookingItem, Context context) {
