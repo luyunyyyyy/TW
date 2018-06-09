@@ -1,5 +1,7 @@
+import domain.BookingItem;
 import domain.Context;
 import domain.InputType;
+import domain.Strs;
 import org.junit.Test;
 
 import static domain.InputType.INVALID;
@@ -56,4 +58,48 @@ public class TestMain {
         assertEquals(context.getBookingItems().get(0).getSiteId(), "A");
     }
 
+    @Test
+    public void should_return_conflicts_when_the_booking_existing() {
+        Context context = new Context();
+        Main.addBookingItem("U001 2017-01-01 18:00~20:00 A", context);
+
+        BookingItem item = Main.getBookingItemFromInput("U001 2017-01-01 17:00~19:00 A");
+        assertEquals(true, Main.isConflicts(item, context));
+
+        BookingItem item1 = Main.getBookingItemFromInput("U001 2017-01-01 19:00~21:00 A");
+        assertEquals(true, Main.isConflicts(item1, context));
+
+        BookingItem item2 = Main.getBookingItemFromInput("U001 2017-01-01 17:00~21:00 A");
+        assertEquals(true, Main.isConflicts(item2, context));
+    }
+
+    @Test
+    public void should_return_none_conflicts_when_the_booking_not_existing() {
+        Context context = new Context();
+        Main.addBookingItem("U001 2017-01-01 20:00~22:00 A", context);
+
+        BookingItem item = Main.getBookingItemFromInput("U001 2017-01-01 19:00~20:00 A");
+        assertEquals(false, Main.isConflicts(item, context));
+    }
+
+
+    @Test
+    public void should_return_str_normal_when_the_booking_not_existing() {
+        Context context = new Context();
+        assertEquals(Strs.NORMAL, Main.addBooking("U001 2017-01-01 20:00~22:00 A", context));
+    }
+
+    @Test
+    public void should_return_str_invalid_when_the_booking_not_existing() {
+        Context context = new Context();
+        assertEquals(Strs.INVALID, Main.addBooking("U001 2017-01-01 20:00~22:0000000 A", context));
+    }
+
+    @Test
+    public void should_return_str_conflicts_when_the_booking_existing() {
+        Context context = new Context();
+        assertEquals(Strs.NORMAL, Main.addBooking("U001 2017-01-01 20:00~22:00 A", context));
+        assertEquals(Strs.CONFLICTS, Main.addBooking("U001 2017-01-01 20:00~21:00 A", context));
+
+    }
 }
